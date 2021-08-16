@@ -46,8 +46,10 @@ function makeHtmlBoard() {
   htmlBoard.append(top);
 
   // Creates the rows and the cells for the game board. Each cell is given a dynamic Y-X id
-  // The top left cell of the board is 0-0, with X increasing to the left, and Y increasing down
-  for (let y = 0; y < HEIGHT; y++) {
+  // The top left cell of the board is 5-0, with X increasing to the left, and Y decreading downwards
+  // I reversed the iteration order in the y loop because the bottom column was originally 5 instead of 0
+  // I will talk to my mentor to see if there is anything I could have done differently
+  for (let y = HEIGHT - 1; y >= 0; y--) {
     const row = document.createElement("tr");
     for (let x = 0; x < WIDTH; x++) {
       const cell = document.createElement("td");
@@ -70,8 +72,11 @@ function findSpotForCol(x) {
 function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell
   const piece = document.createElement('div');
-  piece.classList.add('piece')
-  currPlayer === 1 ? piece.classList.add('p1') : piece.classList.add('p2')
+  piece.classList.add('piece');
+  currPlayer === 1 ? piece.classList.add('p1') : piece.classList.add('p2');
+  let target = document.getElementById(`${y}-${x}`)
+  console.log(target)
+  target.append(piece)
 }
 
 /** endGame: announce game end */
