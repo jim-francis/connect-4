@@ -46,7 +46,7 @@ function makeHtmlBoard() {
   htmlBoard.append(top);
 
   // Creates the rows and the cells for the game board. Each cell is given a dynamic Y-X id
-  // The top left cell of the board is 5-0, with X increasing to the left, and Y decreading downwards
+  // The top left cell of the board is 5-0, with X increasing to the left, and Y decreasing downwards
   // I reversed the iteration order in the y loop because the bottom column was originally 5 instead of 0
   // I will talk to my mentor to see if there is anything I could have done differently
   for (let y = HEIGHT - 1; y >= 0; y--) {
@@ -100,6 +100,8 @@ function handleClick(evt) {
   // place piece in board and add to HTML table
   // TODO: add line to update in-memory board
   placeInTable(y, x);
+  //see check for win. How does this work?
+  board[y][x] = currPlayer;
 
   // check for win
   if (checkForWin()) {
@@ -110,7 +112,6 @@ function handleClick(evt) {
   // TODO: check if all cells in board are filled; if so call, call endGame
 
   // switch players
-  // TODO: switch currPlayer 1 <-> 2
   currPlayer === 1 ? currPlayer = 2 : currPlayer = 1
 }
 
