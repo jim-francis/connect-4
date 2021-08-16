@@ -49,7 +49,8 @@ function makeHtmlBoard() {
   // The top left cell of the board is 5-0, with X increasing to the left, and Y decreasing downwards
   // I reversed the iteration order in the y loop because the bottom column was originally 5 instead of 0
   // I will talk to my mentor to see if there is anything I could have done differently
-  for (let y = HEIGHT - 1; y >= 0; y--) {
+  // Never mind. Error in instructions.
+  for (let y = 0; y < HEIGHT; y++) {
     const row = document.createElement("tr");
     for (let x = 0; x < WIDTH; x++) {
       const cell = document.createElement("td");
@@ -98,9 +99,8 @@ function handleClick(evt) {
   }
 
   // place piece in board and add to HTML table
-  // TODO: add line to update in-memory board
   placeInTable(y, x);
-  //see check for win. How does this work?
+  //see checkForWin function. How does this work?
   board[y][x] = currPlayer;
 
   // check for win
@@ -110,6 +110,7 @@ function handleClick(evt) {
 
   // check for tie
   // TODO: check if all cells in board are filled; if so call, call endGame
+
 
   // switch players
   currPlayer === 1 ? currPlayer = 2 : currPlayer = 1
