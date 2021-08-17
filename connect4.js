@@ -47,13 +47,11 @@ function makeHtmlBoard() {
 
   // Creates the rows and the cells for the game board. Each cell is given a dynamic Y-X id
   // The top left cell of the board is 5-0, with X increasing to the left, and Y increasing downwards.
-  // I added the gameSpace class to select later when checking for tie
   for (let y = 0; y < HEIGHT; y++) {
     const row = document.createElement("tr");
     for (let x = 0; x < WIDTH; x++) {
       const cell = document.createElement("td");
       cell.setAttribute("id", `${y}-${x}`);
-      cell.classList.add("gameSpace")
       row.append(cell);
     }
     htmlBoard.append(row);
@@ -63,7 +61,12 @@ function makeHtmlBoard() {
 
 function findSpotForCol(x) {
   // TODO: write the real version of this, rather than always returning 0
-  return 0;
+  for (let y = HEIGHT - 1; y >= 0; y--) {
+    if (!board[y][x]) {
+      return y
+    }
+  }
+  return null;
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
@@ -73,12 +76,10 @@ function placeInTable(y, x) {
   piece.classList.add('piece');
   currPlayer === 1 ? piece.classList.add('p1') : piece.classList.add('p2');
   let target = document.getElementById(`${y}-${x}`)
-  console.log(target)
   target.append(piece)
 }
 
 /** endGame: announce game end */
-
 function endGame(msg) {
   alert(msg);
 }
@@ -105,15 +106,8 @@ function handleClick(evt) {
   }
 
   // check for tie
-  const allSpaces = Array.from(document.querySelectorAll('.gameSpace'))
-  let tieGame = allSpaces.every(() => {
-    for (let space of allSpaces) {
-      space.childElementCount === 1;
-    }
-  })
-
-  if (tieGame) {
-    endGame('Tie!')
+  if (board.every(row => row.every(col => col))) {
+    return endGame('Tie!');
   }
   // switch players
   currPlayer === 1 ? currPlayer = 2 : currPlayer = 1
