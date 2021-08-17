@@ -7,6 +7,7 @@
 
 const WIDTH = 7;
 const HEIGHT = 6;
+const h1 = document.querySelector('h1');
 
 let currPlayer = 1; // active player: 1 or 2
 const board = []; // array of rows, each row is array of cells  (board[y][x])
@@ -82,6 +83,10 @@ function placeInTable(y, x) {
 /** endGame: announce game end */
 function endGame(msg) {
   alert(msg);
+  // h1.innerHTML = "PLAY <span id=\"four\">AGAIN?</span>"
+  // h1.addEventListener('mouseover', function () {
+  //   h1.style.backgroundColor = "greenyellow"
+  // })
 }
 
 /** handleClick: handle click of column top to play piece */
