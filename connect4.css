@@ -50,3 +50,8 @@ h1 {
 #column-top td:hover {
   background-color: greenyellow;
 }
+
+.winner:hover{
+  background-color: blue;
+  cursor: pointer;
+}

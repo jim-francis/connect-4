@@ -83,10 +83,12 @@ function placeInTable(y, x) {
 /** endGame: announce game end */
 function endGame(msg) {
   alert(msg);
-  // h1.innerHTML = "PLAY <span id=\"four\">AGAIN?</span>"
-  // h1.addEventListener('mouseover', function () {
-  //   h1.style.backgroundColor = "greenyellow"
-  // })
+  h1.innerHTML = "PLAY <span id=\"four\">AGAIN?</span>"
+  h1.classList.add('winner')
+  h1.addEventListener('click', (e) => {
+    location.reload();
+    return false;
+  })
 }
 
 /** handleClick: handle click of column top to play piece */
