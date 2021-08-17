@@ -46,21 +46,19 @@ function makeHtmlBoard() {
   htmlBoard.append(top);
 
   // Creates the rows and the cells for the game board. Each cell is given a dynamic Y-X id
-  // The top left cell of the board is 5-0, with X increasing to the left, and Y decreasing downwards
-  // I reversed the iteration order in the y loop because the bottom column was originally 5 instead of 0
-  // I will talk to my mentor to see if there is anything I could have done differently
-  // Never mind. Error in instructions.
+  // The top left cell of the board is 5-0, with X increasing to the left, and Y increasing downwards.
+  // I added the gameSpace class to select later when checking for tie
   for (let y = 0; y < HEIGHT; y++) {
     const row = document.createElement("tr");
     for (let x = 0; x < WIDTH; x++) {
       const cell = document.createElement("td");
       cell.setAttribute("id", `${y}-${x}`);
+      cell.classList.add("gameSpace")
       row.append(cell);
     }
     htmlBoard.append(row);
   }
 }
-
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 
 function findSpotForCol(x) {
@@ -71,7 +69,6 @@ function findSpotForCol(x) {
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 function placeInTable(y, x) {
-  // TODO: make a div and insert into correct table cell
   const piece = document.createElement('div');
   piece.classList.add('piece');
   currPlayer === 1 ? piece.classList.add('p1') : piece.classList.add('p2');
@@ -83,7 +80,7 @@ function placeInTable(y, x) {
 /** endGame: announce game end */
 
 function endGame(msg) {
-  // TODO: pop up alert message
+  alert(msg);
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -100,7 +97,6 @@ function handleClick(evt) {
 
   // place piece in board and add to HTML table
   placeInTable(y, x);
-  //see checkForWin function. How does this work?
   board[y][x] = currPlayer;
 
   // check for win
@@ -109,9 +105,16 @@ function handleClick(evt) {
   }
 
   // check for tie
-  // TODO: check if all cells in board are filled; if so call, call endGame
+  const allSpaces = Array.from(document.querySelectorAll('.gameSpace'))
+  let tieGame = allSpaces.every(() => {
+    for (let space of allSpaces) {
+      space.childElementCount === 1;
+    }
+  })
 
-
+  if (tieGame) {
+    endGame('Tie!')
+  }
   // switch players
   currPlayer === 1 ? currPlayer = 2 : currPlayer = 1
 }
@@ -133,8 +136,6 @@ function checkForWin() {
         board[y][x] === currPlayer
     );
   }
-
-  // TODO: read and understand this code. Add comments to help you.
 
   for (let y = 0; y < HEIGHT; y++) {
     for (let x = 0; x < WIDTH; x++) {
