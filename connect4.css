@@ -8,7 +8,7 @@
   height: 50px;
   border: solid 2px #666;
 }
-#four {
+.four {
   color: red;
 }
 
@@ -54,4 +54,8 @@ h1 {
 .winner:hover{
   background-color: blue;
   cursor: pointer;
+}
+
+.blue{
+  color: blue;
 }

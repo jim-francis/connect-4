@@ -8,6 +8,7 @@
 const WIDTH = 7;
 const HEIGHT = 6;
 const h1 = document.querySelector('h1');
+const four = document.querySelector('span')
 
 let currPlayer = 1; // active player: 1 or 2
 const board = []; // array of rows, each row is array of cells  (board[y][x])
@@ -117,6 +118,7 @@ function handleClick(evt) {
     return endGame('Tie!');
   }
   // switch players
+  currPlayer === 1 ? four.classList.add('blue') : four.classList.remove('blue')
   currPlayer === 1 ? currPlayer = 2 : currPlayer = 1
 }
 
